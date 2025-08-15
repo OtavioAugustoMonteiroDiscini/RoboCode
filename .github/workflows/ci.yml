@@ -1,0 +1,32 @@
+name: Reusable Workflow
+# Define o nome do workflow como "Reusable Workflow".
+
+on:
+  workflow_call:
+    # Especifica que este workflow pode ser chamado de outros workflows.
+
+    inputs:
+      # Define os parâmetros de entrada que são necessários para chamar este workflow.
+
+      message:
+        required: true
+        # Declara que a entrada "message" é obrigatória.
+
+        type: string
+        # Especifica que o tipo da entrada "message" é uma string.
+
+jobs:
+  log-message:
+    # Define um job chamado "log-message".
+
+    runs-on: ubuntu-latest
+    # Especifica que o job será executado em um ambiente baseado em Ubuntu.
+
+    steps:
+      # Lista as etapas a serem executadas neste job.
+
+      - name: Log a message
+        # Dá nome à etapa como "Log a message".
+
+        run: echo ${{ inputs.message }}
+        # Executa o comando para imprimir a mensagem fornecida no input.
