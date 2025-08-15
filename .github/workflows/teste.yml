@@ -8,7 +8,7 @@ jobs:
   call-reusable-workflow:
     # Define um job chamado "call-reusable-workflow".
 
-    uses:  OtavioAugustoMonteiroDiscini/php-workflows/.github/workflows/ci.yml@main
+    uses:  OtavioAugustoMonteiroDiscini/workflows/.github/workflows/ci.yml@main
     # Especifica a localização do workflow reutilizável que deve ser chamado.
     # Certifique-se de que o caminho e branch (main) estão corretos.
 
