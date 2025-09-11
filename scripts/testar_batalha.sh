@@ -68,8 +68,12 @@ EOF
 
 grep -E "github.Corners|github.PrimeiroRobo" battle_logs/sample_result.txt | head -40 >> "$REPORT_HTML"
 
+WINNER=$(grep -A 10 "Battle Results" battle_logs/sample_result.txt | grep -m1 "1st" | awk '{print $2}')
+
 cat >> "$REPORT_HTML" <<EOF
   </pre>
+  <h2>Resultado Final</h2>
+  <p><b>Vencedor:</b> $WINNER</p>
   <footer>
     Relatório gerado automaticamente em $(date '+%d/%m/%Y %H:%M') <br>
     © Otávio Augusto Monteiro Discini — Todos os direitos reservados
