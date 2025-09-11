@@ -14,7 +14,7 @@ robocode.battle.hideEnemyNames=false
 robocode.battle.robots=github.Corners,github.PrimeiroRobo
 EOF
 
-echo "Rodando batalha entre os robôs github.Corners e github.PrimeiroRobo..."
+echo "Rodando batalha entre os robôs github.Corners e github.RoboBauer..."
 java -Xmx512M -cp libs/robocode.jar robocode.Robocode -battle battle_logs/sample_vs_sample.battle -nodisplay > battle_logs/sample_result.txt 2>&1 || true
 
 # Lê os status
