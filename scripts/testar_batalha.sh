@@ -66,14 +66,26 @@ cat > "$REPORT_HTML" <<EOF
   <pre>
 EOF
 
-grep -E "github.Corners|github.PrimeiroRobo" battle_logs/sample_result.txt | head -40 >> "$REPORT_HTML"
-
-WINNER=$(grep -A 10 "Battle Results" battle_logs/sample_result.txt | grep -m1 "1st" | awk '{print $2}')
+# Extrai resultados da batalha (ranking)
+RESULTS=$(grep -A 10 "Battle Results" battle_logs/sample_result.txt | grep -E "1st:|2nd:|3rd:|4th:")
 
 cat >> "$REPORT_HTML" <<EOF
   </pre>
-  <h2>Resultado Final</h2>
-  <p><b>Vencedor:</b> $WINNER</p>
+  <h2>Ranking da Batalha</h2>
+  <table>
+    <tr><th>Posição</th><th>Robô</th><th>Pontos</th></tr>
+EOF
+
+# Loop para preencher a tabela com posições, nomes e pontos
+echo "$RESULTS" | while read -r line; do
+  POS=$(echo $line | awk -F':' '{print $1}')
+  NAME=$(echo $line | awk '{print $2}')
+  SCORE=$(echo $line | awk '{print $3}')
+  echo "    <tr><td>$POS</td><td>$NAME</td><td>$SCORE</td></tr>" >> "$REPORT_HTML"
+done
+
+cat >> "$REPORT_HTML" <<EOF
+  </table>
   <footer>
     Relatório gerado automaticamente em $(date '+%d/%m/%Y %H:%M') <br>
     © Otávio Augusto Monteiro Discini — Todos os direitos reservados
@@ -81,6 +93,9 @@ cat >> "$REPORT_HTML" <<EOF
 </body>
 </html>
 EOF
+
+echo "Relatório HTML gerado em $REPORT_HTML"
+exit 0
 
 echo "Relatório HTML gerado em $REPORT_HTML"
 exit 0
